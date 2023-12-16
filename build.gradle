@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
-    id "com.github.johnrengelman.shadow" version "4.0.4"
+    id "com.github.johnrengelman.shadow" version "8.1.1"
 }
 
 defaultTasks 'build'
@@ -17,6 +17,7 @@ repositories {
     maven { url = 'https://repo.codemc.io/repository/maven-public/' }
     maven { url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
     maven { url = 'https://repo.dmulloy2.net/repository/public/' }
+    maven { url = 'https://nexuslite.gcnt.net/repos/other/' }
 }
 
 dependencies {
@@ -26,6 +27,7 @@ dependencies {
     compileOnly 'com.comphenix.protocol:ProtocolLib:4.8.0'
     implementation 'org.bstats:bstats-bukkit:3.0.0'
     implementation 'de.tr7zw:item-nbt-api:2.12.1'
+    implementation 'com.tcoded:FoliaLib:0.3.1'
 
     // Annotations
     compileOnly 'org.projectlombok:lombok:1.18.30'
@@ -34,11 +36,10 @@ dependencies {
     annotationProcessor 'org.jetbrains:annotations:24.0.1'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 compileJava {
     options.encoding = 'UTF-8'
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 publishing {

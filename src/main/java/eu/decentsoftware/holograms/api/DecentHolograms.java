@@ -1,13 +1,16 @@
 package eu.decentsoftware.holograms.api;
 
+import com.tcoded.folialib.FoliaLib;
+import com.tcoded.folialib.impl.ServerImplementation;
 import eu.decentsoftware.holograms.api.animations.AnimationManager;
 import eu.decentsoftware.holograms.api.commands.CommandManager;
 import eu.decentsoftware.holograms.api.features.FeatureManager;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import eu.decentsoftware.holograms.api.holograms.HologramManager;
+import eu.decentsoftware.holograms.api.listeners.PlayerListener;
+import eu.decentsoftware.holograms.api.listeners.WorldListener;
 import eu.decentsoftware.holograms.api.nms.NMS;
 import eu.decentsoftware.holograms.api.nms.PacketListener;
-import eu.decentsoftware.holograms.api.listeners.PlayerListener;
 import eu.decentsoftware.holograms.api.utils.BungeeUtils;
 import eu.decentsoftware.holograms.api.utils.Common;
 import eu.decentsoftware.holograms.api.utils.DExecutor;
@@ -16,7 +19,6 @@ import eu.decentsoftware.holograms.api.utils.event.EventFactory;
 import eu.decentsoftware.holograms.api.utils.reflect.ReflectionUtil;
 import eu.decentsoftware.holograms.api.utils.reflect.Version;
 import eu.decentsoftware.holograms.api.utils.tick.Ticker;
-import eu.decentsoftware.holograms.api.listeners.WorldListener;
 import eu.decentsoftware.holograms.event.DecentHologramsReloadEvent;
 import lombok.Getter;
 import lombok.NonNull;
@@ -42,6 +44,7 @@ import java.util.logging.Logger;
 @Getter
 public final class DecentHolograms {
 
+    private final ServerImplementation scheduler;
     private final JavaPlugin plugin;
     private HologramManager hologramManager;
     private CommandManager commandManager;
@@ -57,6 +60,7 @@ public final class DecentHolograms {
 
     DecentHolograms(@NonNull JavaPlugin plugin) {
         this.plugin = plugin;
+        this.scheduler = new FoliaLib(plugin).getImpl();
     }
 
     /*
