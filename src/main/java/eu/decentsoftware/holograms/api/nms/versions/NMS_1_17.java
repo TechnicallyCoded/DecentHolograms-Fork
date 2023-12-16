@@ -72,18 +72,27 @@ public class NMS_1_17 extends NMS {
     private static final ReflectField<AtomicInteger> ENTITY_COUNTER_FIELD;
     private static final Object VEC_3D_A;
     private static final Class<?> DWR_CLASS = ReflectionUtil.getNMClass("network.syncher.DataWatcherRegistry");
-    private static final ReflectMethod DWI_GET_OBJECT_METHOD = new ReflectMethod(DWI_CLASS, "a");
-    private static final ReflectMethod DWI_GET_VALUE_METHOD = new ReflectMethod(DWI_CLASS, "b");
-    private static final ReflectMethod DWO_GET_SERIALIZER_METHOD = new ReflectMethod(DWO_CLASS, "b");
-    private static final ReflectMethod DWO_GET_INDEX_METHOD = new ReflectMethod(DWO_CLASS, "a");
-    private static final ReflectMethod DWS_GET_TYPE_ID_METHOD = new ReflectMethod(DWR_CLASS, "b", DWS_CLASS);
-    private static final ReflectMethod DWS_SERIALIZE_METHOD = new ReflectMethod(DWS_CLASS, "a",
-            PACKET_DATA_SERIALIZER_CLASS, Object.class);
+    private static final ReflectMethod DWI_GET_OBJECT_METHOD;
+    private static final ReflectMethod DWI_GET_VALUE_METHOD;
+    private static final ReflectMethod DWO_GET_SERIALIZER_METHOD;
+    private static final ReflectMethod DWO_GET_INDEX_METHOD;
+    private static final ReflectMethod DWS_GET_TYPE_ID_METHOD;
+    private static final ReflectMethod DWS_SERIALIZE_METHOD;
 
     static {
         DWO_CLASS = ReflectionUtil.getNMClass("network.syncher.DataWatcherObject");
         DWS_CLASS = ReflectionUtil.getNMClass("network.syncher.DataWatcherSerializer");
         DWI_CLASS = ReflectionUtil.getNMClass("network.syncher.DataWatcher$Item");
+        // Fix by mani1232
+        PACKET_DATA_SERIALIZER_CLASS = ReflectionUtil.getNMClass("network.PacketDataSerializer");
+
+        DWI_GET_OBJECT_METHOD = new ReflectMethod(DWI_CLASS, "a");
+        DWI_GET_VALUE_METHOD = new ReflectMethod(DWI_CLASS, "b");
+        DWO_GET_SERIALIZER_METHOD = new ReflectMethod(DWO_CLASS, "b");
+        DWO_GET_INDEX_METHOD = new ReflectMethod(DWO_CLASS, "a");
+        DWS_GET_TYPE_ID_METHOD = new ReflectMethod(DWR_CLASS, "b", DWS_CLASS);
+        DWS_SERIALIZE_METHOD = new ReflectMethod(DWS_CLASS, "a",
+                PACKET_DATA_SERIALIZER_CLASS, Object.class);
         // UTILITY
         ENTITY_CLASS = ReflectionUtil.getNMClass("world.entity.Entity");
         ENTITY_ARMOR_STAND_CLASS = ReflectionUtil.getNMClass("world.entity.decoration.EntityArmorStand");
@@ -117,7 +126,6 @@ public class NMS_1_17 extends NMS {
         MATH_HELPER_CLASS = ReflectionUtil.getNMClass("util.MathHelper");
         MATH_HELPER_A_METHOD = new ReflectMethod(MATH_HELPER_CLASS, "a", Random.class);
         // PACKET DATA SERIALIZER
-        PACKET_DATA_SERIALIZER_CLASS = ReflectionUtil.getNMClass("network.PacketDataSerializer");
         PACKET_DATA_SERIALIZER_CONSTRUCTOR = new ReflectConstructor(PACKET_DATA_SERIALIZER_CLASS, ByteBuf.class);
         if (Version.afterOrEqual(Version.v1_20_R2)) {
             PACKET_DATA_SERIALIZER_WRITE_INT_METHOD = new ReflectMethod(PACKET_DATA_SERIALIZER_CLASS, "c", int.class);
